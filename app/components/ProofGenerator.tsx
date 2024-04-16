@@ -12,13 +12,14 @@ function ProofGenerator() {
     const [username , setUsername] = useState('');
     const [cpassword, setCPassword] = useState('');
     const [isMismatched, setIsMismatched] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handleGenerateProof() {
         try {
             const passwordBigInt = hashPasswordToBigInt(password);
             const input = { "secret" : passwordBigInt };
             const { proof, publicSignals } = await snarkjs.plonk.fullProve(input, "/generate_proof.wasm", "/circuit_final.zkey");
-            registerOnMongo({ proof, publicSignals});
+            return { proof, publicSignals};
 
         } catch ( error ) {
         }
@@ -52,12 +53,42 @@ function ProofGenerator() {
             }
         
             const data = await response.json(); // Only parse as JSON if the response was ok
-            console.log('Registration successful', data);
+            alert('User registered successfully! Try logging in now.');
           } catch (error) {
-            console.error('Error submitting registration', error);
+            alert(`error submitting registration ${error}`);
           }
       }
       
+    async function verifyOnBackend(username: string, proof: any) {
+        setIsLoading(true);
+        
+        try {
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URI || '';
+            console.log('Verifying login with backend:', backendUrl);
+            const response = await fetch(backendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    proof
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok && data.message === 'Login successful') {
+                alert('Login successful!')
+                // Handle successful login, e.g., redirecting to another page or setting user context
+            } else {
+                throw new Error(data.error || 'Failed to login');
+            }
+        } catch (error) {
+            alert(`Login failed: ${error}`);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
@@ -76,16 +107,25 @@ function ProofGenerator() {
         }
     }
 
-    const handleSignupClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSignupClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        if ((password === cpassword)&&(username !== '')&&(password !== '')) {
-            handleGenerateProof();
+        if ((password === cpassword) && (username !== '') && (password !== '')) {
+            const result = await handleGenerateProof();
+            if (result && result.proof && result.publicSignals) {
+                const { proof, publicSignals } = result;
+                await registerOnMongo({ proof, publicSignals });
+            }
         }
     }
 
-    const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleLoginClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        console.log('Login clicked');
+        const result = await handleGenerateProof();
+            if (result && result.proof && result.publicSignals) {
+                const { proof, publicSignals } = result;
+                await verifyOnBackend(username, proof);
+        }
+
     }
 
     return (
