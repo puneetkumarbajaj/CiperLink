@@ -13,12 +13,12 @@ Open-Source: CiperLink is open-source, allowing developers to contribute to and 
 Comprehensive Documentation: Comes with detailed documentation and examples, making it easy for developers to implement and customize according to their needs.
 
 ### Technologies Used:
-Node.js: For creating a scalable backend capable of handling authentication logic and database interactions.
-MongoDB: As a NoSQL database to store user data and authentication tokens securely.
-Google Cloud Functions: Leveraged for deploying serverless functions that handle authentication requests, ensuring quick scalability and reduced server costs.
-React: Used on the frontend to build a responsive and interactive user interface.
-Next.js: A React framework that provides server-side rendering to improve SEO and boost performance.
-Mongoose: To manage relationships between data, provide schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+##### Node.js: For creating a scalable backend capable of handling authentication logic and database interactions.
+##### MongoDB: As a NoSQL database to store user data and authentication tokens securely.
+##### Google Cloud Functions: Leveraged for deploying serverless functions that handle authentication requests, ensuring quick scalability and reduced server costs.
+##### React: Used on the frontend to build a responsive and interactive user interface.
+##### Next.js: A React framework that provides server-side rendering to improve SEO and boost performance.
+##### Mongoose: To manage relationships between data, provide schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
 
 ### Getting Started:
 To get started with CiperLink, clone this repository and follow the setup instructions in the README.md file. Example code and API documentation are available to help you integrate CiperLink into your applications seamlessly.
