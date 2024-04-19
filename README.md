@@ -13,6 +13,7 @@ Open-Source: CiperLink is open-source, allowing developers to contribute to and 
 Comprehensive Documentation: Comes with detailed documentation and examples, making it easy for developers to implement and customize according to their needs.
 
 ### Technologies Used:
+##### SnarkJS : The main cryptographic JS library supporting all the proof and verification functions for the application
 ##### Node.js: For creating a scalable backend capable of handling authentication logic and database interactions.
 ##### MongoDB: As a NoSQL database to store user data and authentication tokens securely.
 ##### Google Cloud Functions: Leveraged for deploying serverless functions that handle authentication requests, ensuring quick scalability and reduced server costs.
