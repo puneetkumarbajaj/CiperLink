@@ -2,7 +2,7 @@
 Welcome to CiperLink, an innovative solution harnessing the power of Zero-Knowledge Proofs (ZKP) to offer a cutting-edge authentication system. This project is designed for developers looking to integrate heightened security without compromising on user privacy. CiperLink enables secure authentication by allowing users to prove their credentials without exposing any sensitive information.
 
 ### Working Deployment 
-ciper-link.vercel.app
+[CiperLink](ciperlink.puneetbajaj.com)
 
 
 ### Key Features:
@@ -31,8 +31,6 @@ cd CiperLink
 npm install
 npm start
 ```
-
-### Technologies 
 
 ### Contributing:
 I welcome contributions from the community. If you have suggestions or improvements, please fork the repository and submit a pull request.
