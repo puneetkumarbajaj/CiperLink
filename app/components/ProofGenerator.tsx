@@ -154,7 +154,7 @@ function ProofGenerator() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col sm:flex-row gap-20 justify-center items-center mt-20 md:mt-0">
+    <div className="h-full w-full flex flex-col sm:flex-row gap-20 justify-center items-center my-20 md:my-0">
       <Tabs defaultValue="login" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">Login</TabsTrigger>
